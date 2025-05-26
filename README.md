@@ -1,21 +1,4 @@
-# PowerTCP-KernelBypass
-
-This is a work in progress repository providing a Kernel Bypass implementation of [PowerTCP (NSDI 2022)](https://www.usenix.org/conference/nsdi22/presentation/addanki) based on DPDK. Please consider citing the following paper if you use this repository in your research.
-
-```bib
-@inproceedings{nsdi22,
-  author = {Addanki, Vamsi and Michel, Oliver and Schmid, Stefan},
-  title = {{PowerTCP}: Pushing the Performance Limits of Datacenter Networks},
-  booktitle = {19th USENIX Symposium on Networked Systems Design and Implementation (NSDI 22)},
-  year = {2022},
-  address = {Renton, WA},
-  url = {https://www.usenix.org/conference/nsdi22/presentation/addanki},
-  publisher = {USENIX Association},
-  month = {April},
-}
-```
-
-This work is part of a semester project carried out by [Peter Bangert](https://github.com/peterbangert) under the supervision of [Vamsi Addanki](https://github.com/vamsiDT) at TU Berlin. Please feel free to [contact us](#contact-us) if you have any questions.
+# MTCP on DPDK in VirtualBox
 
 ## Current Status
 
@@ -75,6 +58,5 @@ cd PowerTCP-KernelBypass # changing directory to root of this repository
 ## Contact Us
 
 ```
-Peter Bangert - bangert@campus.tu-berlin.de
-Vamsi Addanki - vamsi@inet.tu-berlin.de
+Peter Bangert - petbangert@gmail.com
 ```
