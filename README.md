@@ -5,7 +5,7 @@
 - Setting up required modules (mtcp + DPDK) works well on Ubuntu 22 and Kernel 5.15
 - mtcp reaches 15Gbps approx with single core
 - [ToDo] Optimize DPDK parameters and system configurations to saturate 25Gbps link
-- [ToDo] PowerTCP congestion control logic to be integrated soon after initial testing
+
 - [ToDo] Create a new perf client that continuously generates flows based on a flow size distribution
 
 ## Installation
