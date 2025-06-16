@@ -10,22 +10,15 @@ This constellation allows for customization and testing in a simulated real netw
 
 The contents of this walkthrough is as follows.
 
-1. Testbed Installation
-
-- [Testbed Installation Guide](testbed_installation/)
+1. [Testbed Installation](testbed_installation/)
 
 - This guide contains a one-shot script to download an Ubutnu ISO and setup the 3 VMs and Networks
 
-2. DPDK Installation
-
-- [DPDK Installation Guide](dpdk_installation/)
+2. [DPDK Installation](dpdk_installation/)
 
 - This guide explains how to install DPDK and run some basic sender/reciever examples
 
-
-3. mTCP Installation
-
-- [mTCP Installation Guide](mtcp_installation/)
+3. [mTCP Installation](mtcp_installation/)
 
 - This guide a (challanging) walkthrough how to install and compile mTCP to allow you to develop your own TCP level functionality within DPDK
 
