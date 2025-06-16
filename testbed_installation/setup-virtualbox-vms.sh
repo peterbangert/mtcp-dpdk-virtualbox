@@ -2,7 +2,7 @@
 set -euxo pipefail
 
 # Configuration Variables
-ISO_PATH="$HOME/Downloads/ubuntu-24.04.2-live-server-amd64.iso"  # Path to the ISO file
+ISO_PATH="ubuntu-24.04.2-live-server-amd64.iso"  # Path to the ISO file
 VMS=("dpdk1" "dpdk2" "router")
 OSTYPE="Ubuntu_64"  # Change this to match your OS type
 DISK_SIZE="20000"   # Size in MB (20GB)
@@ -18,13 +18,16 @@ if ! command -v VBoxManage &> /dev/null; then
     exit 1
 fi
 
-# Ensure the ISO file exists
-# Check if the ISO exists
-if [ ! -e "$ISO_PATH" ]; then
-    echo "Warning: The ISO file at '$ISO_PATH' does not exist. Please download and alter script to use correct file"
-    exit 1
+# Define the URL and the expected file name
+URL="https://ubuntu.com/download/server/thank-you?version=24.04.2&architecture=amd64&lts=true"
+
+# Check if the file already exists
+if [ -f "$ISO_PATH" ]; then
+    echo "The file '$EXPECTED_FILENAME' already exists in the current directory."
+else
+    echo "Downloading the ISO file..."
+    wget -O "$ISO_PATH" "$URL"
 fi
-echo "The ISO file exists. Continuing with the script..."
 
 # Configure Subnets for each DPDK VM
 vboxmanage dhcpserver add --netname subnet_dpdk1 --ip 10.10.10.1 --netmask 255.255.255.0 --lowerip 10.10.10.2 --upperip 10.10.10.212 --enable
@@ -60,7 +63,7 @@ create_vm() {
     #VBoxManage modifyvm "$VM_NAME" --nic1 natnetwork --nat-network1 "$NAT_NETWORK_NAME"
 
     # Enable the first network adapter and attach to the specified bridged interface, default is en0 on macOS
-    VBoxManage modifyvm "$VM_NAME" --nic1 bridged --bridgeadapter1 en0
+    VBoxManage modifyvm "$VM_NAME" --nic1 bridged --bridgeadapter1 enp0s31f6
 
     if [ "$VM_NAME" == "router" ]; then
         VBoxManage modifyvm "$VM_NAME" --nic2 intnet --intnet2 "subnet_dpdk1"
