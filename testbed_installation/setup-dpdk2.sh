@@ -14,3 +14,7 @@ sudo apt-get install -y net-tools iptables-persistent
 # Create dpdk interface
 sudo ifconfig dpdk0  10.10.11.6 netmask 255.255.255.0 up
 route add -net 10.10.10.0 netmask 255.255.255.0 gw 10.10.11.5 dev dpdk0
+
+# Allow Machine ID regeneration
+sudo rm /etc/machine-id
+sudo systemd-machine-id-setup

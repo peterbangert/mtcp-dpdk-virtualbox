@@ -39,3 +39,7 @@ echo "$network_config" | sudo tee -a /etc/network/interfaces > /dev/null
 
 # Notify the user
 echo "Network configuration has been added to /etc/network/interfaces."
+
+# Allow Machine ID regeneration
+sudo rm /etc/machine-id
+sudo systemd-machine-id-setup
