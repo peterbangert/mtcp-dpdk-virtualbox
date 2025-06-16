@@ -30,8 +30,8 @@ else
 fi
 
 # Configure Subnets for each DPDK VM
-vboxmanage dhcpserver add --netname subnet_dpdk1 --ip 10.10.10.1 --netmask 255.255.255.0 --lowerip 10.10.10.2 --upperip 10.10.10.212 --enable
-vboxmanage dhcpserver add --netname subnet_dpdk2 --ip 10.10.11.1 --netmask 255.255.255.0 --lowerip 10.10.11.2 --upperip 10.10.11.212 --enable
+vboxmanage dhcpserver add --netname subnet_dpdk1 --ip 10.10.10.1 --netmask 255.255.255.0 --lowerip 10.10.10.2 --upperip 10.10.10.212 --enable || true
+vboxmanage dhcpserver add --netname subnet_dpdk2 --ip 10.10.11.1 --netmask 255.255.255.0 --lowerip 10.10.11.2 --upperip 10.10.11.212 --enable || true
 
 # Create virtual machines
 create_vm() {
