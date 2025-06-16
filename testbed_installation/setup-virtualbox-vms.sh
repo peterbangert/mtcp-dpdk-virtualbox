@@ -2,7 +2,7 @@
 set -euxo pipefail
 
 # Configuration Variables
-ISO_PATH="ubuntu-24.04.2-live-server-amd64.iso"  # Path to the ISO file
+ISO_PATH="./ubuntu-24.04.2-live-server-amd64.iso"  # Path to the ISO file
 VMS=("dpdk1" "dpdk2" "router")
 OSTYPE="Ubuntu_64"  # Change this to match your OS type
 DISK_SIZE="20000"   # Size in MB (20GB)
