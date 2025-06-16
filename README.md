@@ -1,53 +1,34 @@
-# MTCP on DPDK in VirtualBox
+# DPDK/MTCP in VirtualBox
 
-## Current Status
+This walkthrough is designed to follow setup a Virtual Testbed in Virtualbox comprised of 2 sender/reciever VMs, each residing in a seperate subnet connected to one another by a Router VM. 
 
-- Setting up required modules (mtcp + DPDK) works well on Ubuntu 22 and Kernel 5.15
-- mtcp reaches 15Gbps approx with single core
-- [ToDo] Optimize DPDK parameters and system configurations to saturate 25Gbps link
+<p align="center">
+  <img src="./testbed_installation/img/testbed.png" />
+</p>
 
-- [ToDo] Create a new perf client that continuously generates flows based on a flow size distribution
+This constellation allows for customization and testing in a simulated real networking environment. 
 
-## Installation
-1. Clone this repository. The best way is to use `recurse-submodules` tag.
-```bash
-git clone --recurse-submodules git@github.com:inet-tub/PowerTCP-KernelBypass.git
-cd PowerTCP-KernelBypass # changing directory to root of this repository
-```
-2. *[Skip if you followed 1.]* If you already cloned this repository without `recurse-submodules` tag, then use the following commands:
-	```bash
-	git clone git@github.com:inet-tub/PowerTCP-KernelBypass.git
-	cd PowerTCP-KernelBypass/mtcp
-	git submodule init
-	git submodule update
-	cd dpdk
-	git submodule init
-	git submodule update
-	# Custom versions of DPDK are not supported yet by the mtcp developers! 
-	# You might have to deal with compilation errors.
-	git checkout <commithash> 
-	cd ./../../
-	```
-3. The installation process can be done in one shot by running `./setup.sh`. Otherwise, follow the step by step procedure below.
-	- Change directory `cd scripts/`
-	- Apply the patch by running `./apply-dpdk-mtcp-patch.sh`
-	- Install DPDK by running `./install-dpdk.sh`
-		- This script assumes that your target is "x86_64-native-linuxapp-gcc". If not, change `$RTE_TARGET` accordingly.
-	- Install mtcp by running `./install-mtcp.sh`
-		- This script also assumes that your target is "x86_64-native-linuxapp-gcc". If not, change `$RTE_TARGET` accordingly.
+The contents of this walkthrough is as follows.
 
-		- In case `./configure` fails and reports issues with `aclocal-1-x` please run within the `/mtcp` directory:
-		```
-		autoreconf -ivf
-		```
+1. Testbed Installation
 
-6. After successfully running the above script, you can now run `mtcp/setup_mtcp_dpdk_env.sh`
-	- Since step 4. already compiled and installed DPDK, you can select exit first
-	- Insert igb_uio
-	- bind relevant network devices to igb_uio (Note: You should set the interfaces down with ifconfig first)
-	- Setup hugepages (eg., 8096 with 2MB hugepages or 16 with 1G hugepages)
-	- Setup VFIO permissions
-	- Exit now and the mtcp setup script will continue.
+- [Testbed Installation Guide](testbed_installation/)
+
+- This guide contains a one-shot script to download an Ubutnu ISO and setup the 3 VMs and Networks
+
+2. DPDK Installation
+
+- [DPDK Installation Guide](dpdk_installation/)
+
+- This guide explains how to install DPDK and run some basic sender/reciever examples
+
+
+3. mTCP Installation
+
+- [mTCP Installation Guide](mtcp_installation/)
+
+- This guide a (challanging) walkthrough how to install and compile mTCP to allow you to develop your own TCP level functionality within DPDK
+
 
 ## Tested Environments
 
@@ -55,8 +36,9 @@ cd PowerTCP-KernelBypass # changing directory to root of this repository
 2. Kernel - 4.4.0-186-generic; gcc version 5.4.0 (Ubuntu 5.4.0-6ubuntu1~16.04.12)
 
 
-## Contact Us
+## Contact
 
 ```
 Peter Bangert - petbangert@gmail.com
 ```
+

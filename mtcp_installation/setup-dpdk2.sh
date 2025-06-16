@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+## Run this script within the DPDK2 Virtual Machine (VM2)
 sudo ifconfig dpdk0  10.10.11.6 netmask 255.255.255.0 up
 export RTE_SDK=`echo $PWD`/mtcp/dpdk
 export RTE_TARGET=x86_64-native-linuxapp-gcc

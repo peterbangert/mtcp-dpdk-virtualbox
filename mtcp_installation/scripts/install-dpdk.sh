@@ -2,7 +2,7 @@
 if [[ ${PWD##*/} == "scripts" ]];then
 	source config.sh
 fi
-export RTE_SDK="$DIR/mtcp/dpdk"
+export RTE_SDK="$MTCP_DIR/mtcp/dpdk"
 export RTE_TARGET="x86_64-native-linuxapp-gcc"
 cd $RTE_SDK
 make install T=$RTE_TARGET

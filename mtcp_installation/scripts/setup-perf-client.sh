@@ -12,7 +12,7 @@ export RTE_SDK=$DIR/mtcp/dpdk
 export RTE_TARGET=x86_64-native-linuxapp-gcc
 # route add -net 10.10.11.0 netmask 255.255.255.0 gw 10.10.10.5 dev dpdk0
 
-PERF_DIR="$DIR/mtcp/apps/perf/config"
+PERF_DIR="$MTCP_DIR/mtcp/apps/perf/config"
 
 if [ ! -d "$PERF_DIR" ]; then
   mkdir -p $PERF_DIR
