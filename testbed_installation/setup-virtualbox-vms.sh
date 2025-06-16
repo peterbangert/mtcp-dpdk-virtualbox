@@ -1,5 +1,4 @@
 #!/bin/bash
-set -euxo pipefail
 
 # Configuration Variables
 ISO_PATH="./ubuntu-24.04.2-live-server-amd64.iso"  # Path to the ISO file
@@ -22,7 +21,7 @@ fi
 URL="https://ftp.halifax.rwth-aachen.de/ubuntu-releases/24.04/ubuntu-24.04.2-live-server-amd64.iso"
 
 # Check if the file already exists
-if [ -f "$ISO_PATH" ]; then
+if [[ -e "$ISO_PATH" ]]; then
     echo "The file '$EXPECTED_FILENAME' already exists in the current directory."
 else
     echo "Downloading the ISO file..."
@@ -30,8 +29,8 @@ else
 fi
 
 # Configure Subnets for each DPDK VM
-vboxmanage dhcpserver add --netname subnet_dpdk1 --ip 10.10.10.1 --netmask 255.255.255.0 --lowerip 10.10.10.2 --upperip 10.10.10.212 --enable || true
-vboxmanage dhcpserver add --netname subnet_dpdk2 --ip 10.10.11.1 --netmask 255.255.255.0 --lowerip 10.10.11.2 --upperip 10.10.11.212 --enable || true
+vboxmanage dhcpserver add --netname subnet_dpdk1 --ip 10.10.10.1 --netmask 255.255.255.0 --lowerip 10.10.10.2 --upperip 10.10.10.212 --enable 
+vboxmanage dhcpserver add --netname subnet_dpdk2 --ip 10.10.11.1 --netmask 255.255.255.0 --lowerip 10.10.11.2 --upperip 10.10.11.212 --enable
 
 # Create virtual machines
 create_vm() {
