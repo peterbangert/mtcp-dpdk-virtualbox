@@ -28,9 +28,18 @@ else
     curl -o "$ISO_PATH" "$URL"
 fi
 
+## VirtualBox Network Configuration
 # Configure Subnets for each DPDK VM
 vboxmanage dhcpserver add --netname subnet_dpdk1 --ip 10.10.10.1 --netmask 255.255.255.0 --lowerip 10.10.10.2 --upperip 10.10.10.212 --enable 
 vboxmanage dhcpserver add --netname subnet_dpdk2 --ip 10.10.11.1 --netmask 255.255.255.0 --lowerip 10.10.11.2 --upperip 10.10.11.212 --enable
+
+# Create NAT network for port forwarding
+VBoxManage natnetwork add --netname NatNetwork --network "10.0.2.0/24" --enable
+VBoxManage natnetwork modify --netname NatNetwork --dhcp on
+VBoxManage natnetwork modify --netname NatNetwork --port-forward-4 "rule1:tcp:[127.0.0.1]:2224:[10.0.2.4]:22"
+VBoxManage natnetwork modify --netname NatNetwork --port-forward-4 "rule2:tcp:[127.0.0.1]:2225:[10.0.2.5]:22"
+VBoxManage natnetwork modify --netname NatNetwork --port-forward-4 "rule3:tcp:[127.0.0.1]:2226:[10.0.2.6]:22"
+
 
 # Create virtual machines
 create_vm() {
@@ -59,10 +68,7 @@ create_vm() {
     VBoxManage storageattach "$VM_NAME" --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium "$ISO_PATH"
 
     # Connect the first network adapter to the NAT network
-    #VBoxManage modifyvm "$VM_NAME" --nic1 natnetwork --nat-network1 "$NAT_NETWORK_NAME"
-
-    # Enable the first network adapter and attach to the specified bridged interface, default is en0 on macOS
-    VBoxManage modifyvm "$VM_NAME" --nic1 bridged --bridgeadapter1 enp0s31f6
+    VBoxManage modifyvm "$VM_NAME" --nic1 natnetwork --nat-network1 "$NAT_NETWORK_NAME"
 
     if [ "$VM_NAME" == "router" ]; then
         VBoxManage modifyvm "$VM_NAME" --nic2 intnet --intnet2 "subnet_dpdk1"
