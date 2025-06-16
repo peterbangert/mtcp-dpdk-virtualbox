@@ -4,7 +4,7 @@ if [[ ${PWD##*/} == "scripts" ]];then
 fi
 export RTE_SDK="$MTCP_DIR/mtcp/dpdk"
 export RTE_TARGET="x86_64-native-linuxapp-gcc"
-export MTCP="$DIR/mtcp"
+export MTCP="$MTCP_DIR/mtcp"
 cd $MTCP
 CFLAGS="-w -fcommon" ./configure --with-dpdk-lib=$RTE_SDK/$RTE_TARGET
 make

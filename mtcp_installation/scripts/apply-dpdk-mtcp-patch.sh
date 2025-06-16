@@ -3,7 +3,7 @@ if [[ ${PWD##*/} == "scripts" ]];then
 	source config.sh
 fi
 
-export RTE_SDK="$DIR/mtcp/dpdk"
+export RTE_SDK="$MTCP_DIR/mtcp/dpdk"
 export RTE_TARGET="x86_64-native-linuxapp-gcc"
 
 KERNEL_VERSION=$(uname -r | awk -F "." '{print $1}')
@@ -22,7 +22,7 @@ else
 	DPDK_CFLAGS[7]="WERROR_FLAGS += -w -fcommon"
 fi
 
-RTE_MK="$DIR/mtcp/dpdk/mk/toolchain/gcc/rte.vars.mk"
+RTE_MK="$MTCP_DIR/mtcp/dpdk/mk/toolchain/gcc/rte.vars.mk"
 echo "Editing $RTE_MK file..."
 CHANGED=0
 for line in "${DPDK_CFLAGS[@]}";do
@@ -41,7 +41,7 @@ else
 fi
 
 echo -e "\n"
-KERNEL_MK="$DIR/mtcp/dpdk/kernel/linux/igb_uio/Makefile"
+KERNEL_MK="$MTCP_DIR/mtcp/dpdk/kernel/linux/igb_uio/Makefile"
 echo "Editing $KERNEL_MK file..."
 line="MODULE_CFLAGS += -Winline -Wall -Werror"
 newline="MODULE_CFLAGS += -Winline -Wall"
@@ -55,7 +55,7 @@ else
 fi
 
 echo -e "\n"
-KERNEL_MK="$DIR/mtcp/dpdk/kernel/linux/kni/Makefile"
+KERNEL_MK="$MTCP_DIR/mtcp/dpdk/kernel/linux/kni/Makefile"
 echo "Editing $KERNEL_MK file..."
 line="MODULE_CFLAGS += -Wall -Werror"
 if [[ $KERNEL_VERSION -eq 4 ]];then
@@ -82,7 +82,7 @@ else
 fi
 
 echo -e "\n"
-DPDK_IFACE="$DIR/mtcp/dpdk-iface-kmod/dpdk_iface.h"
+DPDK_IFACE="$DMTCP_DIRIR/mtcp/dpdk-iface-kmod/dpdk_iface.h"
 echo "Editing $DPDK_IFACE..."
 if [[ $KERNEL_VERSION -eq 4 ]];then
 	echo "nothing to do in $DPDK_IFACE"
@@ -112,5 +112,5 @@ echo "Modified $RTE_SDK/mk/rte.app.mk"
 echo -e "\n"
 echo "#####################"
 echo "Successfully applied the path"
-echo "You can now run ./install-dpdk.sh, ./apply-powertcp-patch.sh and then ./install-mtcp.sh"
+echo "You can now run ./install-dpdk.sh and then ./install-mtcp.sh"
 echo "#####################"
