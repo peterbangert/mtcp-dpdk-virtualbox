@@ -19,14 +19,14 @@ if ! command -v VBoxManage &> /dev/null; then
 fi
 
 # Define the URL and the expected file name
-URL="https://ubuntu.com/download/server/thank-you?version=24.04.2&architecture=amd64&lts=true"
+URL="https://ftp.halifax.rwth-aachen.de/ubuntu-releases/24.04/ubuntu-24.04.2-live-server-amd64.iso"
 
 # Check if the file already exists
 if [ -f "$ISO_PATH" ]; then
     echo "The file '$EXPECTED_FILENAME' already exists in the current directory."
 else
     echo "Downloading the ISO file..."
-    wget -O "$ISO_PATH" "$URL"
+    curl -o "$ISO_PATH" "$URL"
 fi
 
 # Configure Subnets for each DPDK VM
