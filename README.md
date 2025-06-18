@@ -12,7 +12,7 @@ The contents of this walkthrough is as follows.
 
 1. [Testbed Installation](testbed_installation/)
 
-- This guide contains a one-shot script to download an Ubutnu ISO and setup the 3 VMs and Networks
+- This guide contains a one-shot script to download an Ubutnu ISO and setup the 3 VMs and respective Networks
 
 2. [DPDK Installation](dpdk_installation/)
 
@@ -20,7 +20,7 @@ The contents of this walkthrough is as follows.
 
 3. [mTCP Installation](mtcp_installation/)
 
-- This guide a (challanging) walkthrough how to install and compile mTCP to allow you to develop your own TCP level functionality within DPDK
+- This guide is a (challenging) walkthrough on how to install and compile mTCP to allow you to emaulate the entire TCP stack or develop your own Transmission control layer functionality within DPDK
 
 
 ## Tested Environments
